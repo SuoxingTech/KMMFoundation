@@ -92,7 +92,7 @@ android {
 
 afterEvaluate {
     configureMavenPublish(
-        artifactId = "kmm_analytics",
+        artifactId = "kmm-analytics",
         version = "1.0.0-alpha01",
         descriptions = "KMM analytics util using Firebase.",
         publishingExtension = publishing

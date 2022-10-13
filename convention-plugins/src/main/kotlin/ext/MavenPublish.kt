@@ -3,7 +3,7 @@ package ext
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
-import org.gradle.kotlin.dsl.create
+import org.gradle.kotlin.dsl.withType
 import java.io.File
 import java.io.FileInputStream
 import java.util.*
@@ -35,8 +35,7 @@ fun Project.configureMavenPublish(
             }
         }
         publications {
-            create<MavenPublication>("gpr") {
-
+            withType(MavenPublication::class) {
                 this.groupId = "dev.suoxing.kmm"
                 this.artifactId = artifactId
                 this.version = version
