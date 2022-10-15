@@ -62,19 +62,19 @@ kotlin {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 26
-        targetSdk = 32
+        targetSdk = 33
     }
 }
 
-afterEvaluate {
+publishing {
     configureMavenPublish(
         artifactId = "kmm-kv",
-        version = "1.0.0-alpha02",
+        version = "1.0.0-alpha13",
         descriptions = "KMM key-value storage library.",
-        publishingExtension = publishing
+        publishingExtension = this
     )
 }

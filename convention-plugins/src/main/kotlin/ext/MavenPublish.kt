@@ -37,11 +37,9 @@ fun Project.configureMavenPublish(
         publications {
             withType(MavenPublication::class) {
                 this.groupId = "dev.suoxing.kmm"
-                this.artifactId = artifactId
                 this.version = version
 
                 pom {
-                    packaging = "jar"
                     name.set(artifactId)
                     description.set(descriptions)
                     url.set("https://github.com/SuoxingTech/KMMFoundation")

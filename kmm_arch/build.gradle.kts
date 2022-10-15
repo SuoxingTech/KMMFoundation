@@ -68,19 +68,19 @@ kotlin {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 26
-        targetSdk = 32
+        targetSdk = 33
     }
 }
 
-afterEvaluate {
+publishing {
     configureMavenPublish(
         artifactId = "kmm-arch",
-        version = "1.0.0-alpha01",
+        version = "1.0.0-alpha13",
         descriptions = "KMM architecture foundations.",
-        publishingExtension = publishing
+        publishingExtension = this
     )
 }

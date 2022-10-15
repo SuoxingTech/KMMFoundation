@@ -70,19 +70,19 @@ kotlin {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 26
-        targetSdk = 32
+        targetSdk = 33
     }
 }
 
-afterEvaluate {
+publishing {
     configureMavenPublish(
         artifactId = "kmm-analytics",
-        version = "1.0.0-alpha01",
+        version = "1.0.0-alpha13",
         descriptions = "KMM analytics util using Firebase.",
-        publishingExtension = publishing
+        publishingExtension = this
     )
 }
