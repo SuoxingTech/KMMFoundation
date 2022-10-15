@@ -37,6 +37,7 @@ fun Project.configureMavenPublish(
         publications {
             withType(MavenPublication::class) {
                 this.groupId = "dev.suoxing.kmm"
+                this.artifactId = this.artifactId.replace("_", "-")
                 this.version = version
 
                 pom {
