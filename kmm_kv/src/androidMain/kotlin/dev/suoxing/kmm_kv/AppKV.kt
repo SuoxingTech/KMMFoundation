@@ -1,16 +1,24 @@
-package dev.suoxing.kmm_arch.kv
+package dev.suoxing.kmm_kv
 
+import android.app.Application
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.*
-import dev.suoxing.kmm_arch.ApplicationWrapper
-import dev.suoxing.kmm_arch.dataStore
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 actual open class AppKV actual constructor(): IAppKV {
 
-    private val dataStore = ApplicationWrapper.instance.dataStore
+    /**
+     * Initialize `AppKV` with provided `Application`.
+     * Call `init` when application creates.
+     */
+    fun init(application: Application) {
+        dataStore = application.dataStore
+    }
+
+    private lateinit var dataStore: DataStore<Preferences>
 
     private fun <T> edit(key: Preferences.Key<T>, value: T) {
         MainScope().launch {

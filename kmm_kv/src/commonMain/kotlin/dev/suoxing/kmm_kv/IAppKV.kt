@@ -1,4 +1,4 @@
-package dev.suoxing.kmm_arch.kv
+package dev.suoxing.kmm_kv
 
 interface IAppKV {
 

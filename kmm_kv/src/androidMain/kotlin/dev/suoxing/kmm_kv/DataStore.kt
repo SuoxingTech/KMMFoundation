@@ -1,4 +1,4 @@
-package dev.suoxing.kmm_arch
+package dev.suoxing.kmm_kv
 
 import android.content.Context
 import androidx.datastore.core.DataStore

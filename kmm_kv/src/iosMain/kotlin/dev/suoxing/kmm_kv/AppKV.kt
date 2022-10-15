@@ -1,7 +1,6 @@
-package dev.suoxing.kmm_arch.kv
+package dev.suoxing.kmm_kv
 
 import platform.Foundation.NSUserDefaults
-import platform.Foundation.setValue
 
 actual open class AppKV actual constructor(): IAppKV {
 

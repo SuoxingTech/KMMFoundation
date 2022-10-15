@@ -2,7 +2,6 @@ import ext.configureMavenPublish
 
 val kotlinCoroutines = "1.6.2"
 val lifecycle = "2.5.1"
-val dataStore = "1.0.0"
 
 plugins {
     kotlin("multiplatform")
@@ -25,6 +24,7 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "kmm_arch"
+            isStatic = true
         }
     }
     
@@ -43,7 +43,6 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutines")
                 api("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle")
-                implementation("androidx.datastore:datastore-preferences:$dataStore")
             }
         }
         val androidTest by getting
@@ -64,19 +63,6 @@ kotlin {
             iosX64Test.dependsOn(this)
             iosArm64Test.dependsOn(this)
             iosSimulatorArm64Test.dependsOn(this)
-        }
-    }
-
-    val publicationsFromMainHost =
-        listOf(jvm(), js()).map { it.name } + "kotlinMultiplatform"
-    publishing {
-        publications {
-            matching { it.name in publicationsFromMainHost }.all {
-                val targetPublication = this@all
-                tasks.withType<AbstractPublishToMaven>()
-                    .matching { it.publication == targetPublication }
-                    .configureEach { onlyIf { findProperty("isMainHost") == "true" } }
-            }
         }
     }
 }

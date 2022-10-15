@@ -1,5 +1,7 @@
 import ext.configureMavenPublish
 
+val dataStore = "1.0.0"
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -8,8 +10,6 @@ plugins {
 }
 
 version = "1.0"
-val firebaseApple = "~> 9.6.0"
-val firebaseAndroid = "30.4.0"
 
 kotlin {
     android()
@@ -22,14 +22,8 @@ kotlin {
         homepage = "Link to the Shared Module homepage"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "kmm_analytics"
+            baseName = "kmm_kv"
             isStatic = true
-        }
-        pod("FirebaseAnalytics") {
-            version = firebaseApple
-        }
-        pod("FirebaseCrashlytics") {
-            version = firebaseApple
         }
     }
     
@@ -42,9 +36,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation(project.dependencies.platform("com.google.firebase:firebase-bom:$firebaseAndroid"))
-                implementation("com.google.firebase:firebase-analytics-ktx")
-                implementation("com.google.firebase:firebase-crashlytics-ktx")
+                implementation("androidx.datastore:datastore-preferences:$dataStore")
             }
         }
         val androidTest by getting
@@ -80,9 +72,9 @@ android {
 
 afterEvaluate {
     configureMavenPublish(
-        artifactId = "kmm-analytics",
-        version = "1.0.0-alpha01",
-        descriptions = "KMM analytics util using Firebase.",
+        artifactId = "kmm-kv",
+        version = "1.0.0-alpha02",
+        descriptions = "KMM key-value storage library.",
         publishingExtension = publishing
     )
 }
