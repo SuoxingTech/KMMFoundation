@@ -81,7 +81,7 @@ android {
 publishing {
     configureMavenPublish(
         artifactId = "kmm-analytics",
-        version = "1.0.0-alpha13",
+        version = "1.0.0",
         descriptions = "KMM analytics util using Firebase.",
         publishingExtension = this
     )

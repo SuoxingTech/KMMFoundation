@@ -73,7 +73,7 @@ android {
 publishing {
     configureMavenPublish(
         artifactId = "kmm-kv",
-        version = "1.0.0-alpha13",
+        version = "1.0.0",
         descriptions = "KMM key-value storage library.",
         publishingExtension = this
     )

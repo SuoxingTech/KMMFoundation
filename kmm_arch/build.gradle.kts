@@ -79,7 +79,7 @@ android {
 publishing {
     configureMavenPublish(
         artifactId = "kmm-arch",
-        version = "1.0.0-alpha13",
+        version = "1.0.0",
         descriptions = "KMM architecture foundations.",
         publishingExtension = this
     )
