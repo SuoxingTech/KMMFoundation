@@ -1,4 +1,6 @@
 import ext.configureMavenPublish
+import ext.firebaseAndroid
+import ext.firebaseApple
 
 plugins {
     kotlin("multiplatform")
@@ -8,8 +10,6 @@ plugins {
 }
 
 version = "1.0"
-val firebaseApple = "~> 9.6.0"
-val firebaseAndroid = "30.4.0"
 
 kotlin {
     android()

@@ -1,14 +1,14 @@
 import ext.configureMavenPublish
-import ext.dataStore
+import ext.coroutine
+import ext.realm
 
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("io.realm.kotlin")
     id("convention.publications")
 }
-
-version = "1.0"
 
 kotlin {
     android()
@@ -19,25 +19,27 @@ kotlin {
     cocoapods {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
+        version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "kmm_kv"
+            baseName = "kmm_database"
             isStatic = true
         }
     }
     
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine")
+                implementation("io.realm.kotlin:library-base:$realm")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting {
-            dependencies {
-                implementation("androidx.datastore:datastore-preferences:$dataStore")
-            }
-        }
+        val androidMain by getting
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
@@ -61,8 +63,8 @@ kotlin {
 }
 
 android {
+    namespace = "dev.suoxing.kmm_database"
     compileSdk = 33
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 26
         targetSdk = 33
@@ -71,9 +73,9 @@ android {
 
 publishing {
     configureMavenPublish(
-        artifactId = "kmm-kv",
+        artifactId = "kmm-database",
         version = "1.0.0",
-        descriptions = "KMM key-value storage library.",
+        descriptions = "KMM realm database.",
         publishingExtension = this
     )
 }

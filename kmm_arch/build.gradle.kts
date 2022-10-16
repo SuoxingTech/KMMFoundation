@@ -1,7 +1,6 @@
 import ext.configureMavenPublish
-
-val kotlinCoroutines = "1.6.2"
-val lifecycle = "2.5.1"
+import ext.coroutine
+import ext.lifecycle
 
 plugins {
     kotlin("multiplatform")
@@ -31,7 +30,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutines")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine")
             }
         }
         val commonTest by getting {
@@ -41,7 +40,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutines")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine")
                 api("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle")
             }
         }
