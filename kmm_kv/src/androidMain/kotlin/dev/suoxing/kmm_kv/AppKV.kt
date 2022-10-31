@@ -29,7 +29,24 @@ actual open class AppKV actual constructor(): IAppKV {
     }
 
     /**
-     * Temporary felt unhappy of reading value synchronously 😭😭😭
+     * Preload DataStore on main entries to speed up further reading
+     * operation.(Since it will cache data into memory)
+     *
+     * Usage:
+     * onCreate() {
+     *     lifecycleScope.launch {
+     *         AppKV.preloadDataStore()
+     *     }
+     * }
+     */
+    suspend fun preloadDataStore() {
+        dataStore.data.first()
+    }
+
+    /**
+     * Reading value synchronously.
+     * To reduce performance shortage, please call [preloadDataStore] on main entries
+     * of your App's user journey.
      */
     private fun <T> get(key: Preferences.Key<T>, defValue: T): T {
         return runBlocking {
