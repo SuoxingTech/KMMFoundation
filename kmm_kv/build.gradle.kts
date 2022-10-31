@@ -11,7 +11,9 @@ plugins {
 version = "1.0"
 
 kotlin {
-    android()
+    android {
+        publishLibraryVariants("release")
+    }
     iosX64()
     iosArm64()
     iosSimulatorArm64()
