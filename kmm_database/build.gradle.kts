@@ -33,7 +33,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine")
-                implementation("io.realm.kotlin:library-base:$realm")
+                api("io.realm.kotlin:library-base:$realm")
             }
         }
         val commonTest by getting {
@@ -76,7 +76,7 @@ android {
 publishing {
     configureMavenPublish(
         artifactId = "kmm-database",
-        version = "1.1.0",
+        version = "1.2.1",
         descriptions = "KMM realm database.",
         publishingExtension = this
     )

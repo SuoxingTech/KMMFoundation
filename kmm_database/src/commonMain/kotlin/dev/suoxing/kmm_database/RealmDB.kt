@@ -20,22 +20,42 @@ abstract class RealmDB {
     var isOpen = false
         private set
 
+    private val config by lazy {
+        RealmConfiguration.Builder(models).build()
+    }
+
+    private var _realm: Realm? = null
+
     /**
      * Get [Realm] object reference by lazy.
      */
-    val realm: Realm by lazy {
-        val config = RealmConfiguration.Builder(models).build()
-        isOpen = true
-        Realm.open(config)
-    }
+    val realm: Realm
+        get() {
+            val instance = _realm
+            return if (instance == null || !isOpen) {
+                val newInsance = Realm.open(config)
+                _realm = newInsance
+                newInsance
+            } else {
+                instance
+            }
+        }
 
     /**
      * Close a [Realm] database connection.
      */
     fun close() {
-        if (isOpen) {
-            realm.close()
-        }
+        realm.close()
+        isOpen = false
+    }
+
+    /**
+     * Delete all data.
+     */
+    fun deleteRealm() {
+        isOpen = false
+        realm.close()
+        Realm.deleteRealm(config)
     }
 
     /**
