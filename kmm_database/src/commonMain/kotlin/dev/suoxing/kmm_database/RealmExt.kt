@@ -25,6 +25,14 @@ fun <T: RealmObject> RealmQuery<T>.flowQuery(): Flow<List<T>> {
     }
 }
 
+fun <T: RealmObject, R> RealmQuery<T>.flowQuery(
+    transform: (T) -> R
+): Flow<List<R>> {
+    return this.asFlow().map {
+        it.list.toList().map(transform)
+    }
+}
+
 /**
  * Simplify the process of responding to changes in a specific [RealmObject].
  *
@@ -33,6 +41,14 @@ fun <T: RealmObject> RealmQuery<T>.flowQuery(): Flow<List<T>> {
 fun <T: RealmObject> RealmSingleQuery<T>.flowSingle(): Flow<T?> {
     return this.asFlow().map {
         it.obj
+    }
+}
+
+fun <T: RealmObject, R> RealmSingleQuery<T>.flowSingle(
+    transform: (T?) -> R
+): Flow<R> {
+    return this.asFlow().map {
+        transform(it.obj)
     }
 }
 
@@ -45,5 +61,13 @@ fun <T: RealmObject> RealmSingleQuery<T>.flowSingle(): Flow<T?> {
 fun <T: RealmObject> RealmList<T>.flowNestedList(): Flow<List<T>> {
     return this.asFlow().map {
         it.list.toList()
+    }
+}
+
+fun <T: RealmObject, R> RealmList<T>.flowNestedList(
+    transform: (T) -> R
+): Flow<List<R>> {
+    return this.asFlow().map {
+        it.list.toList().map(transform)
     }
 }
