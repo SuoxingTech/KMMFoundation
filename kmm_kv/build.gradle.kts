@@ -37,7 +37,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("androidx.datastore:datastore-preferences:$dataStore")
+                api("androidx.datastore:datastore-preferences:$dataStore")
             }
         }
         val androidTest by getting
@@ -74,7 +74,7 @@ android {
 publishing {
     configureMavenPublish(
         artifactId = "kmm-kv",
-        version = "1.1.0",
+        version = "1.2.0",
         descriptions = "KMM key-value storage library.",
         publishingExtension = this
     )
