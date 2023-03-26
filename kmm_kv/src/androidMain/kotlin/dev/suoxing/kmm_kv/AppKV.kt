@@ -2,11 +2,9 @@ package dev.suoxing.kmm_kv
 
 import android.app.Application
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.*
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 
 actual open class AppKV actual constructor(): IAppKV {
 
@@ -21,7 +19,7 @@ actual open class AppKV actual constructor(): IAppKV {
     private lateinit var dataStore: DataStore<Preferences>
 
     private fun <T> edit(key: Preferences.Key<T>, value: T) {
-        MainScope().launch {
+        runBlocking {
             dataStore.edit {
                 it[key] = value
             }
