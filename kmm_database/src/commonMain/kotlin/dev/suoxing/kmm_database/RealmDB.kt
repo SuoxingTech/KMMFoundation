@@ -53,9 +53,9 @@ abstract class RealmDB {
      * Delete all data.
      */
     fun deleteRealm() {
-        isOpen = false
-        realm.close()
-        Realm.deleteRealm(config)
+        realm.writeBlocking {
+            deleteAll()
+        }
     }
 
     /**
