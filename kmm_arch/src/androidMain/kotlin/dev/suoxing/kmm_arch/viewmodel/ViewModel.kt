@@ -5,10 +5,10 @@ import dev.suoxing.kmm_arch.createViewModelScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 actual abstract class ViewModel<T: Any> actual constructor(): ViewModel() {
-    protected actual val viewModelScope: CoroutineScope = createViewModelScope()
+    protected actual var viewModelScope: CoroutineScope = createViewModelScope()
+        private set
 
     public actual override fun onCleared() {
         super.onCleared()
