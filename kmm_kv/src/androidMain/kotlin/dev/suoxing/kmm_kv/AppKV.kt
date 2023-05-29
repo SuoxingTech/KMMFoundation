@@ -42,6 +42,22 @@ actual open class AppKV actual constructor(): IAppKV {
     }
 
     /**
+     * Clear DataStore values.
+     *
+     * @param ignoreKeys key names that needs to be retained from remove operation
+     */
+    suspend fun clear(ignoreKeys: List<String>) {
+        val keys = dataStore.data.first().asMap().keys
+        dataStore.edit { prefs ->
+            keys.filter {
+                !ignoreKeys.contains(it.name)
+            }.forEach {
+                prefs.remove(it)
+            }
+        }
+    }
+
+    /**
      * Reading value synchronously.
      * To reduce performance shortage, please call [preloadDataStore] on main entries
      * of your App's user journey.
