@@ -22,8 +22,14 @@ actual object SXAnalytics {
         init()
     }
 
+    fun stopCollection() {
+        Firebase.analytics.setAnalyticsCollectionEnabled(false)
+    }
+
     actual fun init() {
-        analytics = Firebase.analytics
+        analytics = Firebase.analytics.apply {
+            setAnalyticsCollectionEnabled(true)
+        }
     }
 
     actual fun logEvent(event: String, params: Map<String, Any>) {
