@@ -22,6 +22,10 @@ actual object SXAnalytics {
         init()
     }
 
+    fun setUserProperty(key: String, value: String) {
+        Firebase.analytics.setUserProperty(key, value)
+    }
+
     fun stopCollection() {
         Firebase.analytics.setAnalyticsCollectionEnabled(false)
     }
