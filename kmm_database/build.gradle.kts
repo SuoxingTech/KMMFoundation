@@ -26,6 +26,7 @@ kotlin {
         framework {
             baseName = "kmm_database"
             isStatic = true
+            embedBitcode("disable")
         }
     }
     
@@ -76,7 +77,7 @@ android {
 publishing {
     configureMavenPublish(
         artifactId = "kmm-database",
-        version = "1.4.0",
+        version = "1.5.1",
         descriptions = "KMM realm database.",
         publishingExtension = this
     )

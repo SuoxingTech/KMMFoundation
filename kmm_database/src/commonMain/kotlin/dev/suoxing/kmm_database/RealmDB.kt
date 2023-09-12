@@ -2,7 +2,7 @@ package dev.suoxing.kmm_database
 
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
-import io.realm.kotlin.types.BaseRealmObject
+import io.realm.kotlin.types.TypedRealmObject
 import kotlin.reflect.KClass
 
 /**
@@ -59,7 +59,7 @@ abstract class RealmDB {
     }
 
     /**
-     * Define [Realm] models. Should be subclass of [BaseRealmObject].
+     * Define [Realm] models. Should be subclass of [TypedRealmObject].
      */
-    abstract val models: Set<KClass<out BaseRealmObject>>
+    abstract val models: Set<KClass<out TypedRealmObject>>
 }
