@@ -52,6 +52,7 @@ kotlin {
 }
 
 android {
+    namespace = "dev.suoxing.kmmfoundation"
     compileSdk = 32
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {

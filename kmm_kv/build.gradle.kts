@@ -63,6 +63,7 @@ kotlin {
 }
 
 android {
+    namespace = "dev.suoxing.kmm_kv"
     compileSdk = 33
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
