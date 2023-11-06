@@ -77,14 +77,16 @@ android {
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 26
-        targetSdk = 33
+    }
+    kotlin {
+        jvmToolchain(8)
     }
 }
 
 publishing {
     configureMavenPublish(
         artifactId = "kmm-analytics",
-        version = "1.3.3",
+        version = "1.3.5",
         descriptions = "KMM analytics util using Firebase.",
         publishingExtension = this
     )
