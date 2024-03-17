@@ -33,21 +33,27 @@ actual object SXAnalytics {
     }
 
     /**
-     * Convience log event
+     * Convenient log event
      */
     fun logEvent(event: String, vararg params: Pair<String, Any>) {
         logEvent(event, params.toMap())
     }
 
     actual fun logEvent(event: String, params: Map<String, Any>) {
-        Firebase.analytics.logEvent(event) {
-            params.forEach {
-                when (it.value) {
-                    is Int -> param(it.key, (it.value as Int).toLong())
-                    is Long -> param(it.key, it.value as Long)
-                    is Float -> param(it.key, (it.value as Float).toDouble())
-                    is Double -> param(it.key, it.value as Double)
-                    else -> param(it.key, it.value.toString())
+        runCatching {
+            /**
+             * `logEvent` can be invoked from somewhere Analytics is not initialized!
+             * So, they are wrapped inside `runCatching` to prevent crashes.
+             */
+            Firebase.analytics.logEvent(event) {
+                params.forEach {
+                    when (it.value) {
+                        is Int -> param(it.key, (it.value as Int).toLong())
+                        is Long -> param(it.key, it.value as Long)
+                        is Float -> param(it.key, (it.value as Float).toDouble())
+                        is Double -> param(it.key, it.value as Double)
+                        else -> param(it.key, it.value.toString())
+                    }
                 }
             }
         }
