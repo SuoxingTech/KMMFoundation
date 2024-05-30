@@ -72,6 +72,9 @@ android {
         minSdk = 26
         targetSdk = 33
     }
+    kotlin {
+        jvmToolchain(8)
+    }
 }
 
 publishing {

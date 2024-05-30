@@ -76,12 +76,15 @@ android {
         minSdk = 26
         targetSdk = 33
     }
+    kotlin {
+        jvmToolchain(8)
+    }
 }
 
 publishing {
     configureMavenPublish(
         artifactId = "kmm-arch",
-        version = "1.5.0",
+        version = "1.6.0",
         descriptions = "KMM architecture foundations.",
         publishingExtension = this
     )
