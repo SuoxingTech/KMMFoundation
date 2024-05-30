@@ -9,8 +9,7 @@ Pod::Spec.new do |spec|
     spec.vendored_frameworks      = 'build/cocoapods/framework/kmm_analytics.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '14.1'
-    spec.dependency 'FirebaseAnalytics', '~> 9.6.0'
-    spec.dependency 'FirebaseCrashlytics', '~> 9.6.0'
+                
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':kmm_analytics',

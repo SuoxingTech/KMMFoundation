@@ -1,6 +1,6 @@
 package ext
 
-val coroutine = "1.7.0"
+val coroutine = "1.7.3"
 val lifecycle = "2.5.1"
 val dataStore = "1.0.0"
 val realm = "1.11.0"

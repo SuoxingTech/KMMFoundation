@@ -27,12 +27,12 @@ kotlin {
             baseName = "kmm_analytics"
             isStatic = true
         }
-        pod("FirebaseAnalytics") {
-            version = firebaseApple
-        }
-        pod("FirebaseCrashlytics") {
-            version = firebaseApple
-        }
+//        pod("FirebaseAnalytics") {
+//            version = firebaseApple
+//        }
+//        pod("FirebaseCrashlytics") {
+//            version = firebaseApple
+//        }
     }
     
     sourceSets {
@@ -49,7 +49,7 @@ kotlin {
                 implementation("com.google.firebase:firebase-crashlytics-ktx")
             }
         }
-        val androidTest by getting
+        val androidUnitTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
