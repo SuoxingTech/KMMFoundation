@@ -1,6 +1,7 @@
 package dev.suoxing.kmm_analytics
 
 import android.content.Context
+import android.os.Bundle
 import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
@@ -22,6 +23,12 @@ actual object SXAnalytics {
 
     fun setUserProperty(key: String, value: String) {
         Firebase.analytics.setUserProperty(key, value)
+    }
+
+    fun updateDefaultParameter(key: String, value: String) {
+        Firebase.analytics.setDefaultEventParameters(Bundle().apply {
+            putString(key, value)
+        })
     }
 
     fun stopCollection() {
