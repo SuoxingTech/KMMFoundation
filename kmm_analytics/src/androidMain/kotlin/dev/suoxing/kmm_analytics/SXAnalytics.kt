@@ -39,6 +39,19 @@ actual object SXAnalytics {
         Firebase.analytics.setAnalyticsCollectionEnabled(true)
     }
 
+    fun logPurchase(
+        currency: String,
+        value: Double,
+        itemId: String
+    ) {
+        logEvent(
+            FirebaseAnalytics.Event.PURCHASE,
+            FirebaseAnalytics.Param.CURRENCY to currency,
+            FirebaseAnalytics.Param.VALUE to value,
+            FirebaseAnalytics.Param.ITEM_ID to itemId
+        )
+    }
+
     /**
      * Convenient log event
      */
