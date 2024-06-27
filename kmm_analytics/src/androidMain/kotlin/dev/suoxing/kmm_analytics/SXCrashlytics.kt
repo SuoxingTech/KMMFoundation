@@ -12,4 +12,8 @@ actual object SXCrashlytics: ISXCrashlytics {
     override fun disable() {
         Firebase.crashlytics.setCrashlyticsCollectionEnabled(false)
     }
+
+    fun reportNonFatal(throwable: Throwable) {
+        Firebase.crashlytics.recordException(throwable)
+    }
 }
