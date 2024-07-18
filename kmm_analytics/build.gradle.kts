@@ -1,6 +1,7 @@
 import ext.configureMavenPublish
 import ext.firebaseAndroid
 import ext.firebaseApple
+import org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode
 
 plugins {
     kotlin("multiplatform")
@@ -12,7 +13,7 @@ plugins {
 version = "1.0"
 
 kotlin {
-    android {
+    androidTarget {
         publishLibraryVariants("release")
     }
     iosX64()
@@ -26,13 +27,16 @@ kotlin {
         framework {
             baseName = "kmm_analytics"
             isStatic = true
+            embedBitcodeMode = BitcodeEmbeddingMode.DISABLE
         }
-//        pod("FirebaseAnalytics") {
-//            version = firebaseApple
-//        }
-//        pod("FirebaseCrashlytics") {
-//            version = firebaseApple
-//        }
+        pod("FirebaseAnalytics") {
+            version = firebaseApple
+            extraOpts = listOf("-compiler-option", "-fmodules")
+        }
+        pod("FirebaseCrashlytics") {
+            version = firebaseApple
+            extraOpts = listOf("-compiler-option", "-fmodules")
+        }
     }
     
     sourceSets {
@@ -73,7 +77,7 @@ kotlin {
 
 android {
     namespace = "dev.suoxing.kmm_analytics"
-    compileSdk = 33
+    compileSdk = 34
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 26

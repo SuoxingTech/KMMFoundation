@@ -1,5 +1,7 @@
 import ext.configureMavenPublish
 import ext.dataStore
+import org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode
+import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
 
 plugins {
     kotlin("multiplatform")
@@ -11,7 +13,7 @@ plugins {
 version = "1.0"
 
 kotlin {
-    android {
+    androidTarget {
         publishLibraryVariants("release")
     }
     iosX64()
@@ -25,6 +27,7 @@ kotlin {
         framework {
             baseName = "kmm_kv"
             isStatic = true
+            embedBitcodeMode = BitcodeEmbeddingMode.DISABLE
         }
     }
     
@@ -64,11 +67,10 @@ kotlin {
 
 android {
     namespace = "dev.suoxing.kmm_kv"
-    compileSdk = 33
+    compileSdk = 34
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 26
-        targetSdk = 33
     }
     kotlin {
         jvmToolchain(8)

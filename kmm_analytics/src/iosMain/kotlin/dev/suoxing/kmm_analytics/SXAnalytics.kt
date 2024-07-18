@@ -1,6 +1,7 @@
 package dev.suoxing.kmm_analytics
 
 import cocoapods.FirebaseAnalytics.FIRAnalytics
+import kotlinx.cinterop.ExperimentalForeignApi
 
 /**
  * SXAnalytics iOS implementation.
@@ -10,10 +11,12 @@ import cocoapods.FirebaseAnalytics.FIRAnalytics
  */
 actual object SXAnalytics: ISXAnalytics {
 
+    @OptIn(ExperimentalForeignApi::class)
     actual override fun init() {
         FIRAnalytics.initialize()
     }
 
+    @OptIn(ExperimentalForeignApi::class)
     actual override fun logEvent(event: String, params: Map<String, Any>) {
         FIRAnalytics.logEventWithName(event, params.mapValues { it })
     }
