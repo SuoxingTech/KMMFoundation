@@ -22,13 +22,17 @@ actual object SXAnalytics {
     }
 
     fun setUserProperty(key: String, value: String) {
-        Firebase.analytics.setUserProperty(key, value)
+        kotlin.runCatching {
+            Firebase.analytics.setUserProperty(key, value)
+        }
     }
 
     fun updateDefaultParameter(key: String, value: String) {
-        Firebase.analytics.setDefaultEventParameters(Bundle().apply {
-            putString(key, value)
-        })
+        kotlin.runCatching {
+            Firebase.analytics.setDefaultEventParameters(Bundle().apply {
+                putString(key, value)
+            })
+        }
     }
 
     fun stopCollection() {
