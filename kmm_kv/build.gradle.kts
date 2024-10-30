@@ -13,6 +13,7 @@ plugins {
 version = "1.0"
 
 kotlin {
+    applyDefaultHierarchyTemplate()
     androidTarget {
         publishLibraryVariants("release")
     }
@@ -73,14 +74,14 @@ android {
         minSdk = 26
     }
     kotlin {
-        jvmToolchain(8)
+        jvmToolchain(21)
     }
 }
 
 publishing {
     configureMavenPublish(
         artifactId = "kmm-kv",
-        version = "1.3.0",
+        version = "1.4.0",
         descriptions = "KMM key-value storage library.",
         publishingExtension = this
     )
