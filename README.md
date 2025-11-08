@@ -187,3 +187,16 @@ struct MainScene: View {
     }
 }
 ```
+
+**If your App Targets 17+**, ViewModels can also benifit from `@Observable` macro. Thus you can define `ObservableViewModel` like this:
+
+``` swift
+@Observable
+class ObservableViewModel<UiState: AnyObject, VM: BaseViewModel<UiState>> {
+    
+    var uiState: UiState
+
+    ...
+}
+```
+> However there is a small trap here: **DO NOT mix `uiState` with `@Bindable` macro**. Keep in mind that our goal for making shared ViewModel is to achieve **Unidirectional Data Flow (UDF)**
