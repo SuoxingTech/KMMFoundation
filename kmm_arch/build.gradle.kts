@@ -1,12 +1,9 @@
 import ext.configureMavenPublish
-import ext.coroutine
-import ext.lifecycle
-import org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.cocoapods)
+    alias(libs.plugins.android.library)
     id("convention.publications")
 }
 
@@ -29,14 +26,13 @@ kotlin {
         framework {
             baseName = "kmm_arch"
             isStatic = true
-            embedBitcodeMode = BitcodeEmbeddingMode.DISABLE
         }
     }
     
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine")
+                implementation(libs.kotlinx.coroutines.core)
             }
         }
         val commonTest by getting {
@@ -46,8 +42,8 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine")
-                api("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle")
+                implementation(libs.kotlinx.coroutines.android)
+                api(libs.androidx.lifecycle.viewmodel.ktx)
             }
         }
     }

@@ -1,13 +1,10 @@
 import ext.configureMavenPublish
-import ext.coroutine
-import ext.realm
-import org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
-    id("io.realm.kotlin")
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.cocoapods)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.realm.kotlin)
     id("convention.publications")
 }
 
@@ -28,15 +25,14 @@ kotlin {
         framework {
             baseName = "kmm_database"
             isStatic = true
-            embedBitcodeMode = BitcodeEmbeddingMode.DISABLE
         }
     }
     
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine")
-                api("io.realm.kotlin:library-base:$realm")
+                implementation(libs.kotlinx.coroutines.core)
+                api(libs.realm.library.base)
             }
         }
         val commonTest by getting {

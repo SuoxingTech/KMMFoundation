@@ -1,14 +1,8 @@
-buildscript {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0")
-        classpath("com.android.tools.build:gradle:8.3.0")
-        classpath("io.realm.kotlin:gradle-plugin:2.1.0")
-    }
+plugins {
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.kotlin.cocoapods) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.realm.kotlin) apply false
 }
 
 allprojects {

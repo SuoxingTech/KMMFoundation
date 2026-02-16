@@ -1,12 +1,9 @@
 import ext.configureMavenPublish
-import ext.dataStore
-import org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode
-import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.cocoapods)
+    alias(libs.plugins.android.library)
     id("convention.publications")
 }
 
@@ -28,7 +25,6 @@ kotlin {
         framework {
             baseName = "kmm_kv"
             isStatic = true
-            embedBitcodeMode = BitcodeEmbeddingMode.DISABLE
         }
     }
     
@@ -41,27 +37,8 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                api("androidx.datastore:datastore-preferences:$dataStore")
+                api(libs.androidx.datastore.preferences)
             }
-        }
-        val androidUnitTest by getting
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-        }
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        val iosSimulatorArm64Test by getting
-        val iosTest by creating {
-            dependsOn(commonTest)
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-            iosSimulatorArm64Test.dependsOn(this)
         }
     }
 }

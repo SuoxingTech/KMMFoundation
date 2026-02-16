@@ -1,0 +1,26 @@
+[versions]
+kotlin = "2.2.10"
+agp = "8.11.1"
+realmPlugin = "2.1.0"
+coroutines = "1.7.3"
+lifecycle = "2.5.1"
+dataStore = "1.0.0"
+realm = "3.0.0"
+firebaseBomAndroid = "32.3.1"
+firebaseApple = "= 10.27.0"
+
+[libraries]
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }
+realm-library-base = { module = "io.realm.kotlin:library-base", version.ref = "realm" }
+firebase-bom-android = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBomAndroid" }
+firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-crashlytics-ktx = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+
+[plugins]
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+realm-kotlin = { id = "io.realm.kotlin", version.ref = "realmPlugin" }

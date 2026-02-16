@@ -1,12 +1,9 @@
 import ext.configureMavenPublish
-import ext.firebaseAndroid
-import ext.firebaseApple
-import org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.cocoapods)
+    alias(libs.plugins.android.library)
     id("convention.publications")
 }
 
@@ -28,14 +25,13 @@ kotlin {
         framework {
             baseName = "kmm_analytics"
             isStatic = true
-            embedBitcodeMode = BitcodeEmbeddingMode.DISABLE
         }
         pod("FirebaseAnalytics") {
-            version = firebaseApple
+            version = libs.versions.firebaseApple.get()
             extraOpts = listOf("-compiler-option", "-fmodules")
         }
         pod("FirebaseCrashlytics") {
-            version = firebaseApple
+            version = libs.versions.firebaseApple.get()
             extraOpts = listOf("-compiler-option", "-fmodules")
         }
     }
@@ -48,9 +44,9 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation(project.dependencies.platform("com.google.firebase:firebase-bom:$firebaseAndroid"))
-                implementation("com.google.firebase:firebase-analytics-ktx")
-                implementation("com.google.firebase:firebase-crashlytics-ktx")
+                implementation(project.dependencies.platform(libs.firebase.bom.android))
+                implementation(libs.firebase.analytics.ktx)
+                implementation(libs.firebase.crashlytics.ktx)
             }
         }
     }
