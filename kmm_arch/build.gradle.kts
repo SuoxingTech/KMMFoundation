@@ -7,7 +7,8 @@ plugins {
     id("convention.publications")
 }
 
-version = "1.0"
+val libraryVersion = "1.7.0"
+version = libraryVersion
 
 kotlin {
     applyDefaultHierarchyTemplate()
@@ -22,6 +23,7 @@ kotlin {
     cocoapods {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
+        version = project.version.toString()
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "kmm_arch"
@@ -64,7 +66,7 @@ android {
 publishing {
     configureMavenPublish(
         artifactId = "kmm-arch",
-        version = "1.7.0",
+        version = libraryVersion,
         descriptions = "KMM architecture foundations.",
         publishingExtension = this
     )

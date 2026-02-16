@@ -8,6 +8,9 @@ plugins {
     id("convention.publications")
 }
 
+val libraryVersion = "1.7.0"
+version = libraryVersion
+
 kotlin {
     applyDefaultHierarchyTemplate()
     androidTarget {
@@ -20,7 +23,7 @@ kotlin {
     cocoapods {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
-        version = "1.0"
+        version = project.version.toString()
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "kmm_database"
@@ -57,7 +60,7 @@ android {
 publishing {
     configureMavenPublish(
         artifactId = "kmm-database",
-        version = "1.7.0",
+        version = libraryVersion,
         descriptions = "KMM realm database.",
         publishingExtension = this
     )
