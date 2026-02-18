@@ -1,13 +1,16 @@
 # KMMFoundation
 A series of KMM(Kotlin Multiplatform Mobile) foundation libraries.
 
+**Warning:** We strongly recommend that you do not use this library directly. Although we use these libraries in our production apps, we suggest using this project only as an implementation reference. If you would like to fork and modify it yourself, please comply with the [AGPL v3](https://www.gnu.org/licenses/agpl-3.0.html) license.
+
 ## Introduction
 
 Official release of KMM libraries provided by SuoxingTech. Including:
 
 - `kmm-arch` which provides fundamental MVVM Architecture Components (i.e. `ViewModel`).
 - `kmm-kv` which provides Key-value storage solution. Jetpack `DataStore` for Android and `NSUserDefaults` for iOS.
-- `kmm-database` which provides wrapped `Realm`'s Kotlin SDK.
+- `kmm-database` ~which provides wrapped `Realm`'s Kotlin SDK.~
+  - This module has been removed from the main branch because the Realm SDK is no longer actively maintained. We have migrated our apps to [Room Multiplatform](https://developer.android.com/kotlin/multiplatform/room). If you still rely on Realm, please refer to the [relevant commit](https://github.com/SuoxingTech/KMMFoundation/commit/c926966826181ad1fbc16e333ae44df63e8c657b) for implementation details.
 - `kmm-analytics` which provides wrapped `FirebaseAnalytics` & `FirebaseCrashlytics`.
 
 For more information about released packages you can visit Packages under our organization space.
@@ -51,12 +54,10 @@ dependencyResolutionManagement {
 
 ``` kotlin
 sourceSets {
-    val commonMain by getting {
-        dependencies {
-            api("dev.suoxing.kmm:kmm-arch:$kmm_arch_ver")
-            api("dev.suoxing.kmm:kmm-kv:$kmm_kv_ver")
-            api("dev.suoxing.kmm:kmm-database:$kmm_database_ver")
-        }
+    commonMain.dependencies {
+        api("dev.suoxing.kmm:kmm-arch:$kmm_arch_ver")
+        api("dev.suoxing.kmm:kmm-kv:$kmm_kv_ver")
+        api("dev.suoxing.kmm:kmm-database:$kmm_database_ver")
     }
 }
 ```
