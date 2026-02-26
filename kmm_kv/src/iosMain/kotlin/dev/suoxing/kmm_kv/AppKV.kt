@@ -8,6 +8,10 @@ actual open class AppKV actual constructor() {
         NSUserDefaults.standardUserDefaults
     }
 
+    actual fun delete(key: String) {
+        defaults.removeObjectForKey(key)
+    }
+
     actual fun putInt(key: String, value: Int) {
         // value: platform.darwin.NSInteger /* = kotlin.Long */
         putLong(key, value.toLong())

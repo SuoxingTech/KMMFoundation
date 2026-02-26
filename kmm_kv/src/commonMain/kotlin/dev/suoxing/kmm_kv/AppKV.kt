@@ -2,6 +2,8 @@ package dev.suoxing.kmm_kv
 
 expect open class AppKV() {
 
+    fun delete(key: String)
+
     fun putInt(key: String, value: Int)
     fun putString(key: String, value: String)
     fun putBoolean(key: String, value: Boolean)

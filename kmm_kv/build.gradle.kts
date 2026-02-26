@@ -7,7 +7,7 @@ plugins {
     id("convention.publications")
 }
 
-val libraryVersion = "1.4.0"
+val libraryVersion = "1.5.0"
 version = libraryVersion
 
 kotlin {
@@ -31,16 +31,8 @@ kotlin {
     }
     
     sourceSets {
-        val commonMain by getting
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
-        }
-        val androidMain by getting {
-            dependencies {
-                api(libs.androidx.datastore.preferences)
-            }
+        androidMain.dependencies {
+            api(libs.androidx.datastore.preferences)
         }
     }
 }

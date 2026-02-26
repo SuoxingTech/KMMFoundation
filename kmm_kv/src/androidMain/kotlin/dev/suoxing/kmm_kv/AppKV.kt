@@ -57,6 +57,18 @@ actual open class AppKV actual constructor() {
         }
     }
 
+    actual fun delete(key: String) {
+        runBlocking {
+            dataStore.edit { prefs ->
+                prefs.asMap().keys
+                    .firstOrNull { it.name == key }
+                    ?.let {
+                        prefs.remove(it)
+                    }
+            }
+        }
+    }
+
     /**
      * Reading value synchronously.
      * To reduce performance shortage, please call [preloadDataStore] on main entries
