@@ -1,19 +1,18 @@
 package dev.suoxing.kmm_analytics
 
-import com.google.firebase.crashlytics.ktx.crashlytics
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 actual object SXCrashlytics: ISXCrashlytics {
 
-    override fun enable() {
-        Firebase.crashlytics.setCrashlyticsCollectionEnabled(true)
+    actual override fun enable() {
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
     }
 
-    override fun disable() {
-        Firebase.crashlytics.setCrashlyticsCollectionEnabled(false)
+    actual override fun disable() {
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(false)
     }
 
     fun reportNonFatal(throwable: Throwable) {
-        Firebase.crashlytics.recordException(throwable)
+        FirebaseCrashlytics.getInstance().recordException(throwable)
     }
 }

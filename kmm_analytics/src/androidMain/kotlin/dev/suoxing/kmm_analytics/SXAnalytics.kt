@@ -4,9 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.analytics.ktx.logEvent
-import com.google.firebase.ktx.Firebase
 
 /**
  * SXAnalytics Android implementation.
@@ -15,32 +12,38 @@ import com.google.firebase.ktx.Firebase
  * @since 2022-09-24
  */
 actual object SXAnalytics {
+    private var analytics: FirebaseAnalytics? = null
 
     fun initApp(context: Context) {
         FirebaseApp.initializeApp(context)
+        analytics = FirebaseAnalytics.getInstance(context)
         init()
     }
 
     fun setUserProperty(key: String, value: String) {
-        kotlin.runCatching {
-            Firebase.analytics.setUserProperty(key, value)
+        withAnalytics {
+            setUserProperty(key, value)
         }
     }
 
     fun updateDefaultParameter(key: String, value: String) {
-        kotlin.runCatching {
-            Firebase.analytics.setDefaultEventParameters(Bundle().apply {
+        withAnalytics {
+            setDefaultEventParameters(Bundle().apply {
                 putString(key, value)
             })
         }
     }
 
     fun stopCollection() {
-        Firebase.analytics.setAnalyticsCollectionEnabled(false)
+        withAnalytics {
+            setAnalyticsCollectionEnabled(false)
+        }
     }
 
     actual fun init() {
-        Firebase.analytics.setAnalyticsCollectionEnabled(true)
+        withAnalytics {
+            setAnalyticsCollectionEnabled(true)
+        }
     }
 
     fun logPurchase(
@@ -64,22 +67,18 @@ actual object SXAnalytics {
     }
 
     actual fun logEvent(event: String, params: Map<String, Any>) {
-        runCatching {
-            /**
-             * `logEvent` can be invoked from somewhere Analytics is not initialized!
-             * So, they are wrapped inside `runCatching` to prevent crashes.
-             */
-            Firebase.analytics.logEvent(event) {
+        withAnalytics {
+            logEvent(event, Bundle().apply {
                 params.forEach {
-                    when (it.value) {
-                        is Int -> param(it.key, (it.value as Int).toLong())
-                        is Long -> param(it.key, it.value as Long)
-                        is Float -> param(it.key, (it.value as Float).toDouble())
-                        is Double -> param(it.key, it.value as Double)
-                        else -> param(it.key, it.value.toString())
+                    when (val value = it.value) {
+                        is Int -> putLong(it.key, value.toLong())
+                        is Long -> putLong(it.key, value)
+                        is Float -> putDouble(it.key, value.toDouble())
+                        is Double -> putDouble(it.key, value)
+                        else -> putString(it.key, value.toString())
                     }
                 }
-            }
+            })
         }
     }
 
@@ -105,5 +104,15 @@ actual object SXAnalytics {
 
     actual fun logImpressEndEvent(params: Map<String, Any>) {
         logEvent(SXAnalyticsEvents.IMPRESS_END, params)
+    }
+
+    private inline fun withAnalytics(block: FirebaseAnalytics.() -> Unit) {
+        kotlin.runCatching {
+            /**
+             * `logEvent` can be invoked before Analytics is initialized on Android.
+             * Ignore it instead of crashing when the app has not called `initApp(context)` yet.
+             */
+            analytics?.block()
+        }
     }
 }

@@ -4,8 +4,8 @@ agp = "8.11.1"
 coroutines = "1.10.2"
 lifecycle = "2.10.0"
 dataStore = "1.0.0"
-firebaseBomAndroid = "34.9.0"
-firebaseApple = "= 10.27.0"
+firebaseBomAndroid = "34.11.0"
+firebaseApple = "= 12.7.0"
 
 [libraries]
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
@@ -13,8 +13,8 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }
 firebase-bom-android = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBomAndroid" }
-firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx" }
-firebase-crashlytics-ktx = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }

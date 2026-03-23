@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'kmm_analytics'
-    spec.version                  = '1.4.3'
+    spec.version                  = '1.5.0'
     spec.homepage                 = 'Link to the Shared Module homepage'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
@@ -8,9 +8,10 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Some description for the Shared Module'
     spec.vendored_frameworks      = 'build/cocoapods/framework/kmm_analytics.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target    = '14.1'
-    spec.dependency 'FirebaseAnalytics', '= 10.27.0'
-    spec.dependency 'FirebaseCrashlytics', '= 10.27.0'
+    spec.ios.deployment_target    = '15.0'
+    spec.dependency 'FirebaseAnalytics', '= 12.7.0'
+    spec.dependency 'FirebaseCore', '= 12.7.0'
+    spec.dependency 'FirebaseCrashlytics', '= 12.7.0'
     if !Dir.exist?('build/cocoapods/framework/kmm_analytics.framework') || Dir.empty?('build/cocoapods/framework/kmm_analytics.framework')
         raise "
         Kotlin framework 'kmm_analytics' doesn't exist yet, so a proper Xcode project can't be generated.

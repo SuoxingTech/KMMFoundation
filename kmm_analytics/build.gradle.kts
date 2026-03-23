@@ -7,7 +7,7 @@ plugins {
     id("convention.publications")
 }
 
-val libraryVersion = "1.4.3"
+val libraryVersion = "1.5.0"
 version = libraryVersion
 
 kotlin {
@@ -23,17 +23,17 @@ kotlin {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
         version = project.version.toString()
-        ios.deploymentTarget = "14.1"
+        ios.deploymentTarget = "15.0"
         framework {
             baseName = "kmm_analytics"
             isStatic = true
             transitiveExport = true
         }
+        pod("FirebaseCore") {
+            version = libs.versions.firebaseApple.get()
+        }
         pod("FirebaseAnalytics") {
             version = libs.versions.firebaseApple.get()
-            extraOpts = listOf(
-                "-compiler-option", "-fmodule-feature=found_incompatible_headers__check_search_paths"
-            )
         }
         pod("FirebaseCrashlytics") {
             version = libs.versions.firebaseApple.get()
@@ -41,17 +41,10 @@ kotlin {
     }
 
     sourceSets {
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
-        }
-        val androidMain by getting {
-            dependencies {
-                implementation(project.dependencies.platform(libs.firebase.bom.android))
-                implementation(libs.firebase.analytics.ktx)
-                implementation(libs.firebase.crashlytics.ktx)
-            }
+        androidMain.dependencies {
+            implementation(project.dependencies.platform(libs.firebase.bom.android))
+            implementation(libs.firebase.analytics)
+            implementation(libs.firebase.crashlytics)
         }
     }
 }
