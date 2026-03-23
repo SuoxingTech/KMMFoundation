@@ -62,8 +62,6 @@ sourceSets {
 }
 ```
 
-> `kmm_analytics` may have issue on iOS builds. you can use only android artifact by add to android dependency like: `implementation("dev.suoxing.kmm:kmm_analytics-android:$kmm_analytics_ver")`
-
 ## Start using `kmm-arch` ViewModel
 
 `dev.suoxing.kmm_arch.viewmodel.ViewModel` aims to make ViewModel cross-platform. So that most bussiness logic code could be placed in `shared` module.
