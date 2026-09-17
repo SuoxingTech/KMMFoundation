@@ -1,51 +1,41 @@
 package dev.suoxing.kmm_analytics
 
 /**
- * SXAnalytics.kt
+ * Provider-independent analytics entry point.
  *
- * @author Yifan Wong
- * @since 2022-09-24
+ * The host application supplies an [IAnalyticsAdapter] during startup.
  */
-expect object SXAnalytics {
+object SXAnalytics {
 
-    /**
-     * Initialize analytics SDK
-     */
-    fun init()
+    private var adapter: IAnalyticsAdapter = EmptyIAnalyticsAdapter
 
-    /**
-     * Track event
-     */
-    fun logEvent(event: String, params: Map<String, Any>)
+    fun register(adapter: IAnalyticsAdapter) {
+        this.adapter = adapter
+    }
 
-    /**
-     * Track click event
-     */
-    fun logClickEvent(params: Map<String, Any>)
+    internal fun registeredAdapter(): IAnalyticsAdapter = adapter
 
-    /**
-     * Track long click event
-     */
-    fun logLongClickEvent(params: Map<String, Any>)
+    fun stopCollection() {
+        adapter.setCollectionEnabled(false)
+    }
 
-    /**
-     * Track view event
-     */
-    fun logViewEvent(params: Map<String, Any>)
+    fun startCollection() {
+        adapter.setCollectionEnabled(true)
+    }
 
-    /**
-     * Track view end event
-     */
-    fun logViewEndEvent(params: Map<String, Any>)
+    fun logEvent(event: String, params: Map<String, Any> = emptyMap()) {
+        adapter.logEvent(event, params)
+    }
 
-    /**
-     * Track impress event
-     */
-    fun logImpressEvent(params: Map<String, Any>)
+    fun setUserProperty(key: String, value: String) {
+        adapter.setUserProperty(key, value)
+    }
 
-    /**
-     * Track impress end event
-     */
-    fun logImpressEndEvent(params: Map<String, Any>)
+    fun updateDefaultParameter(key: String, value: String) {
+        adapter.updateDefaultParameter(key, value)
+    }
 
+    fun logPurchase(currency: String, value: Double, itemId: String) {
+        adapter.logPurchase(currency, value, itemId)
+    }
 }

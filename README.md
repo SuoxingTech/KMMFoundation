@@ -11,7 +11,7 @@ Official release of KMM libraries provided by SuoxingTech. Including:
 - `kmm-kv` which provides Key-value storage solution. Jetpack `DataStore` for Android and `NSUserDefaults` for iOS.
 - `kmm-database` ~which provides wrapped `Realm`'s Kotlin SDK.~
   - This module has been removed from the main branch because the Realm SDK is no longer actively maintained. We have migrated our apps to [Room Multiplatform](https://developer.android.com/kotlin/multiplatform/room). If you still rely on Realm, please refer to the [relevant commit](https://github.com/SuoxingTech/KMMFoundation/commit/c926966826181ad1fbc16e333ae44df63e8c657b) for implementation details.
-- `kmm-analytics` which provides wrapped `FirebaseAnalytics` & `FirebaseCrashlytics`.
+- `kmm-analytics` which provides provider-independent analytics and crash reporting interfaces.
 
 For more information about released packages you can visit Packages under our organization space.
 
@@ -22,7 +22,7 @@ For more information about released packages you can visit Packages under our or
 |`kmm_arch`| `dev.suoxing.kmm:kmm-arch` | ![github](https://img.shields.io/badge/github-v1.6.0-blue) |
 |`kmm_kv`| `dev.suoxing.kmm:kmm-kv` | ![github](https://img.shields.io/badge/github-v1.3.0-blue) |
 |`kmm_database`| `dev.suoxing.kmm:kmm-database` | ![github](https://img.shields.io/badge/github-v1.6.0-blue) |
-|`kmm_analytics`| `dev.suoxing.kmm:kmm-analytics` | ![github](https://img.shields.io/badge/github-v1.4.2-blue) |
+|`kmm_analytics`| `dev.suoxing.kmm:kmm-analytics` | ![github](https://img.shields.io/badge/github-v2.0.0-blue) |
 
 ## Using GitHub Registry
 
@@ -57,7 +57,7 @@ sourceSets {
     commonMain.dependencies {
         api("dev.suoxing.kmm:kmm-arch:$kmm_arch_ver")
         api("dev.suoxing.kmm:kmm-kv:$kmm_kv_ver")
-        api("dev.suoxing.kmm:kmm-database:$kmm_database_ver")
+        api("dev.suoxing.kmm:kmm-analytics:$kmm_analytics_ver")
     }
 }
 ```
